@@ -14,12 +14,12 @@ public class Lock1 {
     private static int count = 0;
 
     private static void increment() {
-        lock.lock();
-        try {
-            count++;
-        } finally {
-            lock.unlock();
-        }
+//        lock.lock();
+//        try {
+        count++;
+//        } finally {
+//            lock.unlock();
+//        }
     }
 
     public static void main(String[] args) {

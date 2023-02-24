@@ -28,17 +28,20 @@ public class OptionalDemo {
      */
     public void map() {
         Optional<Address> addressOptional = Optional.ofNullable(new Address("达尔文路", "88号"));
-        Optional<String>  street          = addressOptional.map(Address::getStreet);
+        Optional<String> street = addressOptional.map(Address::getStreet);
     }
 
     /**
      * 3. 使用 flatMap 链接 Optional 对象
      */
-    public void flatMap() {
-        User           user         = new User();
+    public static void flatMap() {
+        User user = new User();
         Optional<User> userOptional = Optional.of(user);
 //        userOptional.map(user -> user.getOptAddress())
-        Optional<String> stringOptional = userOptional.flatMap(User::getOptAddress).map(Address::getStreet);
+        Optional<Optional<Address>> address = userOptional.map(User::getOptAddress);
+        Optional<Address> address2 = userOptional.flatMap(User::getOptAddress);
+
+        Optional<String> address1 = userOptional.flatMap(User::getOptAddress).map(Address::getStreet);
 
     }
 
@@ -47,16 +50,18 @@ public class OptionalDemo {
      */
     public void defaultValue() {
         Optional<Address> addressOptional = Optional.ofNullable(null);
-        String            street          = addressOptional.map(Address::getStreet).orElse("北京二环");
+        String street = addressOptional.map(Address::getStreet).orElse("北京二环");
         System.out.println(street);
     }
 
     public static void main(String[] args) {
-        User user = new User();
-        user.setUsername("biezhi");
-        user.setPassword("123456");
-        user.setOptAddress(Optional.of(new Address("达尔文路", "88号")));
-        user.setAge(30);
+        flatMap();
+
+//        User user = new User();
+//        user.setUsername("biezhi");
+//        user.setPassword("123456");
+//        user.setOptAddress(Optional.of(new Address("达尔文路", "88号")));
+//        user.setAge(30);
 
 //        Address address1 = null;
 //        try {
@@ -72,7 +77,7 @@ public class OptionalDemo {
 //        }
 //        System.out.println(address1);
 
-        System.out.println(getStreet(Optional.of(user), 50));
+//        System.out.println(getStreet(Optional.of(user), 50));
     }
 
     public static String getStreet(Optional<User> user, int minAge) {
@@ -96,5 +101,9 @@ public class OptionalDemo {
                 .filter(i -> i > 0)
                 .orElse(0);
     }
+
+
+
+
 
 }
