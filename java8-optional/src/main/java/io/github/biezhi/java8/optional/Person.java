@@ -2,6 +2,8 @@ package io.github.biezhi.java8.optional;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+
+
 /**
  * https://blog.csdn.net/aaaPostcard/article/details/123596787
  */
