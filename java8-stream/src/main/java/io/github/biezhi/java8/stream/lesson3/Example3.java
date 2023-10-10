@@ -21,20 +21,29 @@ public class Example3 {
 
     public static void main(String[] args) {
         List<Project> projects = Project.buildData();
-        Map<String, List<Project>> collect = projects.stream()
-                .collect(groupingBy(Project::getAuthor));
-        System.out.println(collect);
+//        Map<String, List<Project>> collect = projects.stream()
+//                .collect(groupingBy(Project::getAuthor));
+//        System.out.println(collect);
 
-        Map<String, Map<String, Long>> collect1 = projects.stream()
-                .collect(groupingBy(Project::getAuthor,
-                        groupingBy(p -> {
-                            if ("java".equalsIgnoreCase(p.getLanguage()) ||
-                                    "python".equalsIgnoreCase(p.getLanguage())) {
-                                return "后端";
-                            }
-                            return "前端";
-                        }, counting())
-                ));
+//        Map<String, Map<String, Long>> collect1 = projects.stream()
+//                .collect(groupingBy(Project::getAuthor,
+//                        groupingBy(p -> {
+//                            if ("java".equalsIgnoreCase(p.getLanguage()) ||
+//                                    "python".equalsIgnoreCase(p.getLanguage())) {
+//                                return "后端";
+//                            }
+//                            return "前端";
+//                        }, counting())
+//                ));
+
+        Map<String, Long> collect1 = projects.stream()
+                .collect(groupingBy(p -> {
+                    if ("java".equalsIgnoreCase(p.getLanguage()) ||
+                            "python".equalsIgnoreCase(p.getLanguage())) {
+                        return "后端";
+                    }
+                    return "前端";
+                }, counting()));
         System.out.println(collect1);
     }
 }
